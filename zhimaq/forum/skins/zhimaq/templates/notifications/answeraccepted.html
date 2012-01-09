@@ -1,0 +1,30 @@
+{% load i18n extra_tags email_tags %}
+
+{% declare %}
+    prefix = html.mark_safe(settings.EMAIL_SUBJECT_PREFIX)
+    answer_author = html.mark_safe(answer.author.username)
+    question = answer.question
+    question_title = html.mark_safe(question.title)
+    accepted_by = html.mark_safe(answer.nstate.accepted.by.username)
+    accepted_by_link = html.objlink(answer.nstate.accepted.by, style=settings.EMAIL_ANCHOR_STYLE)
+    answer_author_link = html.objlink(answer.author, style=settings.EMAIL_ANCHOR_STYLE)
+    question_link = html.objlink(question, style=settings.EMAIL_ANCHOR_STYLE)
+{% enddeclare %}
+
+{% email %}
+    {% subject %}{{ prefix }} 正确答案：{{ question_title }}{% endsubject %}
+
+    {% htmlcontent notifications/base.html %}
+        <p style="{{ p_style }}">            
+                针对问题 {{ question_link }}，{{ accepted_by_link }}接受了{{ answer_author_link }}的答案为正确答案。                
+        </p>
+    {% endhtmlcontent %}
+
+{% textcontent notifications/base_text.html %}
+{% blocktrans %}
+{{ accepted_by }} has just accepted {{ answer_author }}'s answer on his question
+"{{ question_title }}".
+{% endblocktrans %}
+{% endtextcontent %}
+
+{% endemail %}

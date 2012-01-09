@@ -1,0 +1,5 @@
+#!/bin/sh
+PYTHONPATH=/home/local/zhimaq
+export PYTHONPATH
+PROJECT_ROOT=$PYTHONPATH/zhimaq
+python2.5 $PROJECT_ROOT/manage.py send_email_alerts

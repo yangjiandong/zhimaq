@@ -1,0 +1,90 @@
+{% load i18n extra_tags email_tags %}
+
+{% declare %}
+    prefix = html.mark_safe(settings.EMAIL_SUBJECT_PREFIX)
+    app_name = settings.APP_SHORT_NAME
+    app_url = settings.APP_URL
+
+    new_member_links = html.mark_safe(", ".join([html.objlink(u, style=settings.EMAIL_ANCHOR_STYLE) for u in new_members]))
+    new_question_count = digest.count
+
+{% enddeclare %}
+
+{% email %}
+    {% subject %}{{ prefix }} {{ app_name }}今日动态{% endsubject %}
+
+    {% htmlcontent notifications/base.html %}
+        <p style="{{ p_style }}">            
+           以下为今日{{ app_name }}社区动态的摘要内容：
+        </p>                           
+
+        {% if new_member_count %}
+        <p style="{{ p_style }}">
+        {% if show_all_users %}   
+                今日共 {{ new_member_count }} 位网友加入{{ app_name }}，{{ new_member_links }} 等表现活跃。
+        {% else %}        
+            {{ new_member_links }} 今日加入了{{ app_name }}。
+        {% endif %}
+        {% endif %}
+        </p>
+
+        {% if new_question_count %}
+
+        {% declare %}
+            new_questions_link = html.hyperlink(app_url + reverse('questions') + '?sort=' + _('latest'), _('new questions'), style=a_style)
+            user_questions = digest.get_for_user(recipient)
+            subscriptions_link = html.hyperlink(app_url + recipient.get_subscribed_url(), _('subscriptions'), style=a_style)
+        {% enddeclare %}
+
+        <p style="{{ p_style }}">            
+                社区新增 {{ new_question_count }} 个问题 {{ new_questions_link }}。
+        </p>
+
+        {% if user_questions.interesting %}
+        <p style="{{ p_style }}">
+                我们猜你可能对下面的问答感兴趣:
+        </p>
+        <ul>
+        {% for q in user_questions.interesting %}
+            <li>
+                <a style="{{ a_style }}" href="{{ app_url }}{{ q.get_absolute_url  }}">{{ q.title }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if user_questions.may_help %}
+        <p style="{{ p_style }}">
+                以下问题目前还没有人回答，说不定大侠您能够帮忙解答下：            
+        </p>
+        <ul>
+        {% for q in user_questions.may_help %}
+            <li>
+                <a style="{{ a_style }}" href="{{ app_url }}{{ q.get_absolute_url  }}">{{ q.title }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+
+        {% if user_questions.subscriptions %}
+        <p style="{{ p_style }}">
+                你感兴趣的话题 {{ subscriptions_link }} 更新:
+        </p>
+        <ul>
+        {% for q in user_questions.subscriptions %}
+            <li>
+                <a style="{{ a_style }}" href="{{ app_url }}{{ q.get_absolute_url  }}">{{ q.title }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        
+        {% endif %}
+
+        {% endif %}
+
+    {% endhtmlcontent %}
+
+    {% textcontent notifications/base_text.html %}
+
+    {% endtextcontent %}
+{% endemail %}

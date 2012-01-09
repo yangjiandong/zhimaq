@@ -1,0 +1,41 @@
+{% load i18n extra_tags email_tags %}
+
+{% declare %}
+    prefix = html.mark_safe(settings.EMAIL_SUBJECT_PREFIX)
+    app_name = settings.APP_SHORT_NAME
+    safe_app_name = html.mark_safe(settings.APP_SHORT_NAME)
+    answer_author = html.mark_safe(answer.author.username)
+    question = answer.question
+    question_title = html.mark_safe(question.title)
+    safe_body = html.html2text(answer.html)
+    author_link = html.objlink(answer.author, style=settings.EMAIL_ANCHOR_STYLE)
+    question_link = html.objlink(question, style=settings.EMAIL_ANCHOR_STYLE)
+{% enddeclare %}
+
+{% email %}
+    {% subject %}{{ prefix }} 有新答案: {{ question_title }}{% endsubject %}
+
+    {% htmlcontent notifications/base.html %}
+        <p style="{{ p_style }}">
+            {{ author_link }} 刚回答了问题 {{ question_link }}:
+        </p>
+
+        <blockquote>
+        {{ answer.html|safe }}
+        </blockquote>
+
+        <p style="{{ p_style }}">别忘了来评论和投票哦！</p>
+    {% endhtmlcontent %}
+
+{% textcontent notifications/base_text.html %}
+{% blocktrans %}
+{{ answer_author }} has just posted a new answer on {{ safe_app_name }} to the question
+"{{ question_title }}":
+{% endblocktrans %}
+{{ safe_body }}
+
+{% trans "Don't forget to come over and cast your vote." %}
+{% endtextcontent %}
+
+{% endemail %}
+

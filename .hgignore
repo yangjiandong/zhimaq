@@ -1,0 +1,6 @@
+
+syntax: glob
+.pydevproject
+.project
+cache/*
+settings_secret.py
