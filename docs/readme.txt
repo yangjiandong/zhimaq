@@ -50,4 +50,46 @@ from django.utils.safestring import mark_safe
    b. django.core.exceptions.ImproperlyConfigured: App with label attachments could not be found 
    --没影响
 
+   3. 其他类似产品
+
+Sorted by language
+
+PHP
+
+    Question2Answer
+    cahoots
+    phpancake
+    LampCMS
+    Coordino
+    Q&A (Is a WordPress Plugin)
+
+Python
+
+    ASKBOT
+    CNPROG
+    OSQA
+    soclone
+    Plurk Solace
+    FortyTwo
+
+Ruby
+
+    Shapado
+    openoverflow
+    T002_rails-overflow
+    SmartR
+
+ASP.NET
+
+    stacked ASP.NET
+
+C#
+
+    Stack Underflow
+
+JavaScript (JSGI)
+
+    kerjakelompok
+
+      
    --END
