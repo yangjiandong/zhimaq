@@ -1,6 +1,5 @@
 # 学习django系列 - zhimaq 
 
-
 ## 2012.01.09
 
    * git

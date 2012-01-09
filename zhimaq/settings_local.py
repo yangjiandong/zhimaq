@@ -54,12 +54,16 @@ MANAGERS = ADMINS
 
 INTERNAL_IPS = ('127.0.0.1',)
 
-DATABASE_NAME = 'zhimaq'             # Or path to database file if using sqlite3.
-DATABASE_USER = 'root'               # Not used with sqlite3.
-DATABASE_PASSWORD = ''               # Not used with sqlite3.
-DATABASE_ENGINE = 'mysql'  #mysql, etc
-DATABASE_HOST = ''
-DATABASE_PORT = ''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': r'zhimaq',                      # Or path to database file if using sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
 
 if DEBUG:
     CACHE_BACKEND = 'file://%s' % os.path.join(os.path.dirname(__file__), 'cache').replace('\\', '/')
