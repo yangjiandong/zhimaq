@@ -1,19 +1,94 @@
-# README
+# 学习django系列 - zhimaq 
 
-This is what I use to package up Python (mostly Django apps) packages.
 
-## Usage
+## 2012.01.09
 
-* git clone https://paltman@github.com/paltman/python-setup-template.git
-* cd your-project-directory
-* Make sure your package is not at the root of your project directory
-  (e.g. your-project-directory/your\_package)
-* cp -r ../python-setup-template/\* .
-* Doing this you should end up with a setup.py and docs/ as peers to your
-  your\_package directory.
-* Edit the docs/Makefile and change the name of the PROJECT variable
-  to match your package name.
-* Edit the docs/conf.py and set the different variables to the approprate
-  values.
-* Write your documentation you can use the provided stubs, but they are
-  mostly what I use to document Django apps so I leave them in here.
+   * git
+
+   git remote add origin git@github.com:yangjiandong/zhimaq.git
+   git push -u origin master
+
+
+   * setup
+
+   芝麻问答  http://www.zhimaq.com/
+   code:https://bitbucket.org/felinx/zhimaq ,use django,tornado?
+   类似 http://www.osqa.net/ ，http://svn.osqa.net/svnroot/osqa/trunk/ 
+
+install packages for osqa
+easy_install django
+easy_install html5lib
+easy_install markdown
+easy_install python-openid
+easy_install south
+easy_install django-debug-toolbar
+easy_install mysql-python
+
+sudo ./bin/pip install -U html5lib markdown python-openid django-debug-toolbar mysql-python
+  
+syncdb and migrate
+python manage.py syncdb --all
+python manage.py migrate forum --fake
+python manage.py migrate attachments
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+
+   other error:
+   a. ImportError: cannot import name mark_safe 
+   http://wiki.osqa.net/display/docs/Ubuntu+with+Apache+and+MySQL?focusedCommentId=3047880#comment-3047880 
+
+In /forum/utils/html.py
+replace
+from django.template import mark_safe
+with
+from django.utils.safestring import mark_safe
+
+   leo
+
+   b. django.core.exceptions.ImproperlyConfigured: App with label attachments could not be found 
+   --没影响
+
+   * 其他类似产品
+
+Sorted by language
+
+PHP
+
+    Question2Answer
+    cahoots
+    phpancake
+    LampCMS
+    Coordino
+    Q&A (Is a WordPress Plugin)
+
+Python
+
+    ASKBOT
+    CNPROG
+    OSQA
+    soclone
+    Plurk Solace
+    FortyTwo
+
+Ruby
+
+    Shapado
+    openoverflow
+    T002_rails-overflow
+    SmartR
+
+ASP.NET
+
+    stacked ASP.NET
+
+C#
+
+    Stack Underflow
+
+JavaScript (JSGI)
+
+    kerjakelompok
+
+      
+   --END
