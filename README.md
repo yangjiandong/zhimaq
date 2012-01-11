@@ -1,58 +1,57 @@
-# 学习django系列 - zhimaq 
+ 学习django系列 - zhimaq
+======================
 
-## 2012.01.09
+# 2012.01.09
 
-   * git
+1. git
 
-   git remote add origin git@github.com:yangjiandong/zhimaq.git
-   git push -u origin master
+    git remote add origin git@github.com:yangjiandong/zhimaq.git
+    git push -u origin master
+    
+2. setup
 
+    http://www.zhimaq.com/ 芝麻问答
+    code:https://bitbucket.org/felinx/zhimaq ,use django,tornado?
+    same other: http://www.osqa.net/ ，http://svn.osqa.net/svnroot/osqa/trunk/ 
 
-   * setup
+    install packages for osqa:
+    easy_install django
+    easy_install html5lib
+    easy_install markdown
+    easy_install python-openid
+    easy_install south
+    easy_install django-debug-toolbar
+    easy_install mysql-python
 
-   芝麻问答  http://www.zhimaq.com/
-   code:https://bitbucket.org/felinx/zhimaq ,use django,tornado?
-   类似 http://www.osqa.net/ ，http://svn.osqa.net/svnroot/osqa/trunk/ 
-
-install packages for osqa
-easy_install django
-easy_install html5lib
-easy_install markdown
-easy_install python-openid
-easy_install south
-easy_install django-debug-toolbar
-easy_install mysql-python
-
-sudo ./bin/pip install -U html5lib markdown python-openid django-debug-toolbar mysql-python
+    sudo ./bin/pip install -U html5lib markdown python-openid django-debug-toolbar mysql-python
   
-syncdb and migrate
-python manage.py syncdb --all
-python manage.py migrate forum --fake
-python manage.py migrate attachments
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver
+    syncdb and migrate
+    python manage.py syncdb --all
+    python manage.py migrate forum --fake
+    python manage.py migrate attachments
+    python manage.py migrate
+    python manage.py createsuperuser
+    python manage.py runserver
 
-   other error:
-   a. ImportError: cannot import name mark_safe 
-   http://wiki.osqa.net/display/docs/Ubuntu+with+Apache+and+MySQL?focusedCommentId=3047880#comment-3047880 
+    other error:
+    a. ImportError: cannot import name mark_safe 
+    http://wiki.osqa.net/display/docs/Ubuntu+with+Apache+and+MySQL?focusedCommentId=3047880#comment-3047880 
 
-In /forum/utils/html.py
-replace
-from django.template import mark_safe
-with
-from django.utils.safestring import mark_safe
+    In /forum/utils/html.py
+    replace
+    from django.template import mark_safe
+    with
+    from django.utils.safestring import mark_safe
 
-   leo
+    leo
 
-   b. django.core.exceptions.ImproperlyConfigured: App with label attachments could not be found 
-   --没影响
+    b. django.core.exceptions.ImproperlyConfigured: App with label attachments could not be found --没影响
 
-   * 其他类似产品
+3. 其他类似产品
 
-Sorted by language
+    Sorted by language
 
-PHP
+    PHP:
 
     Question2Answer
     cahoots
@@ -61,7 +60,7 @@ PHP
     Coordino
     Q&A (Is a WordPress Plugin)
 
-Python
+    Python:
 
     ASKBOT
     CNPROG
@@ -70,24 +69,22 @@ Python
     Plurk Solace
     FortyTwo
 
-Ruby
+    Ruby:
 
     Shapado
     openoverflow
     T002_rails-overflow
     SmartR
 
-ASP.NET
+    ASP.NET:
 
     stacked ASP.NET
 
-C#
+    C#:
 
     Stack Underflow
 
-JavaScript (JSGI)
+    JavaScript (JSGI):
 
     kerjakelompok
-
-      
-   --END
+    
